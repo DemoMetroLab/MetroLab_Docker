@@ -2,4 +2,4 @@
 
 print "Hello, Python!"
 print "Testing"
-os.listdir()
+os.listdir('.')
