@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os
+#import os
 
 print "Hello, Python!"
 print "Testing"
