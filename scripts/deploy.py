@@ -11,7 +11,7 @@ print(d)
 print("\n\n")
 #print(d["modules"])  # will return 'blabla'
 #print("\n\n")
-def puppet():
+def deploy_puppet():
 	#for x in d:
 	#print "************************\n\n"
 	#print "Printing x out"
@@ -71,3 +71,4 @@ def deploy_container():
 ####### End deploy_container ########
 
 deploy_container()
+deploy_puppet()
