@@ -11,18 +11,8 @@ file { '/tmp/info3.php':
 #####
 # Create the directory to store the docker code in
 #file { ['/var/src/docker']:
-file { ['/var/src']:
-	ensure => directory,
-	#require => File['/var'],
-        mode => '0755',
-        owner => 'puppet',
-        group => 'docker',
-	recurse => 'true',
-}
-
 file { [$docker_root]:
 	ensure => directory,
-	#require => File['/var/src'],
         mode => '0755',
         owner => 'puppet',
         group => 'docker',
@@ -46,10 +36,8 @@ file { 'apache2':
 exec { 'apache_build':
 	require => Exec['docker_install'],
 	cwd => $apache_root,
-	path    => '/usr/local/bin/:/bin/',
 	#command =>"/usr/bin/docker build -t my_apache .; sleep 6; /usr/bin/docker image ls | grep my_ > /tmp/my_apache.inst; docker run -p 8080:80 -d my_apache",
 	command =>"/usr/bin/docker build -t my_apache .; sleep 6; /usr/bin/docker image ls | grep my_ > /tmp/my_apache.inst",
-	#command =>"/usr/bin/docker build -t my_apache .",
 	#command =>"/usr/bin/docker build -t my_apache .",
 	#command => "/bin/echo ${apache_root} > /tmp/apache_root.out",
 
@@ -72,7 +60,7 @@ exec { 'apache_run':
 
 
 #Exec['install_Docker'] -> File['apache2']
-#Exec['install_Docker'] -> File[$docker_root]
+Exec['install_Docker'] -> File[$docker_root]
 File[$docker_root] -> File['apache2']
 File['apache2'] -> Exec['apache_build']
 Exec['apache_build'] -> Exec['apache_run']
