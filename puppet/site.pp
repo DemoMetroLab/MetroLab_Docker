@@ -1,4 +1,3 @@
-
 node 'puppetclient1'  {    # applies to ns1 and ns2 nodes
 include my_docker
 include my_apache
